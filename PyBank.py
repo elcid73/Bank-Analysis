@@ -25,17 +25,17 @@ with open(csvpath, 'r') as csvfile:
     
     for row in csvreader:
         date = row[0]
-        month += 1
-        total += int(row[1])
-        change = int(row[1]) - total_old
+        month += 1                        #calculates number of months
+        total += int(row[1])              #calculates total $$
+        change = int(row[1]) - total_old  #calculates monthly changes
         total_old = int(row[1])
-        dates.append(date)
-        changes.append(change)
+        dates.append(date)                #Creates dates list
+        changes.append(change)            #Creates monthly changes
         
 
-summary=dict(zip(dates,changes))
+summary=dict(zip(dates,changes))          #Creates dictionary of months and monthly changes
     
-summary.pop('Jan-2010')
+summary.pop('Jan-2010')                   #Takes out the first month
 
 
 tot_change = 0
@@ -45,16 +45,16 @@ greatest_decrease = 0
 
 
 for i in summary:
-   tot_change += summary[i]
-   count += 1
+   tot_change += summary[i]              #Calculates total changes over entire period
+   count += 1                            #Calculates count of months during which changes occered
     
    if greatest_decrease == 0:
         greatest_decrease = summary[i]
         date_decrease = i
-   elif summary[i] > greatest_icrease:
+   elif summary[i] > greatest_icrease:  #Determines highest change increase and date
         greatest_icrease = summary[i]
         date_increase = i
-   elif summary[i] < greatest_decrease:
+   elif summary[i] < greatest_decrease: #Determines lowest change increase and date
         greatest_decrease = summary[i] 
         date_decrease = i
         
